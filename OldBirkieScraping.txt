@@ -1,0 +1,5 @@
+java -jar tika-app-1.23.jar -t 2012skate.pdf > 2012skate.txt
+grep -v '^$\|^Place\|Div\|Page [0-9]*\|Birkebeiner' 2012skate.txt | tail -n +7 > 2012results.txt
+sed 's/^\([a-zA-Z]*,[a-zA-Z ]*\)\([0-9]*:[0-9]*:[0-9]*.[0-9]\)\([0-9]*\)/\1, \2, \3,/g' 2012results.txt > 2012resultspartiallyparsed.txt
+sed 's/\([0-9]*:[0-9][0-9]\/K\)/,\1,/g' 2012resultspartiallyparsed.txt > 2012resultsmorepartiallyparsed.txt
+sed 's/\([MF][0-9][0-9]-[0-9][0-9]\)/\1,/g' 2012resultsmorepartiallyparsed.txt > 2012resultsfinallyparsed.txt
